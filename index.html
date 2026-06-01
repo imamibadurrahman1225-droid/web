@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atika Collection | Premium Handmade Macrame Bags</title>
+    
+    <!-- Google Fonts: Playfair Display (Elegant) & Lato (Minimal) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* --- VARIABEL & RESET --- */
+        :root {
+            --c-bg: #F9F7F2; /* Cream / Ivory */
+            --c-text: #3D405B;
+            --c-accent: #E07A5F; /* Terracotta */
+            --c-secondary: #81B29A; /* Sage Green */
+            --c-white: #FFFFFF;
+            --c-gray: #F4F4F4;
+            --font-head: 'Playfair Display', serif;
+            --font-body: 'Lato', sans-serif;
+            --shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--font-body); background-color: var(--c-bg); color: var(--c-text); line-height: 1.6; }
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; }
+        
+        /* --- UTILITY --- */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .btn { display: inline-block; padding: 12px 30px; background-color: var(--c-accent); color: var(--c-white); border: none; cursor: pointer; font-family: var(--font-body); letter-spacing: 1px; text-transform: uppercase; font-size: 0.9rem; }
+        .btn:hover { background-color: #c66a50; }
+        .btn-outline { background: transparent; border: 1px solid var(--c-text); color: var(--c-text); }
+        .btn-outline:hover { background: var(--c-text); color: var(--c-white); }
+        .section-title { font-family: var(--font-head); font-size: 2.5rem; text-align: center; margin-bottom: 10px; color: var(--c-text); }
+        .section-subtitle { text-align: center; color: var(--c-secondary); margin-bottom: 50px; font-style: italic; }
+
+        /* --- HEADER --- */
+        header { background: var(--c-bg); padding: 20px 0; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid rgba(0,0,0,0.05); }
+        nav { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: var(--font-head); font-size: 1.8rem; font-weight: 600; color: var(--c-accent); }
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links li a { font-size: 0.95rem; letter-spacing: 1px; }
+        .nav-links li a:hover { color: var(--c-accent); }
+        .nav-icons { display: flex; gap: 20px; cursor: pointer; }
+        .cart-icon { position: relative; }
+        .cart-count { position: absolute; top: -8px; right: -8px; background: var(--c-accent); color: white; font-size: 10px; width: 18px; height: 18px; border-radius: 50%; display: flex; justify-content: center; align-items: center; }
+
+        /* --- SECTIONS (SPA ROUTING) --- */
+        .page-section { display: none; padding-top: 60px; padding-bottom: 80px; animation: fadeIn 0.5s ease; }
+        .page-section.active { display: block; }
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* --- HOME --- */
+        .hero { display: flex; align-items: center; gap: 50px; min-height: 80vh; }
+        .hero-text { flex: 1; }
+        .hero-text h1 { font-family: var(--font-head); font-size: 4rem; line-height: 1.1; margin-bottom: 20px; color: var(--c-text); }
+        .hero-text p { font-size: 1.1rem; margin-bottom: 30px; color: #666; max-width: 400px; }
+        .hero-image { flex: 1; position: relative; }
+        .hero-image img { border-radius: 150px 150px 0 0; box-shadow: var(--shadow); }
+        
+        .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 80px; }
+        .feature-card { text-align: center; padding: 30px; background: var(--c-white); border: 1px solid #eee; }
+        .feature-card i { font-size: 2rem; color: var(--c-secondary); margin-bottom: 15px; }
+
+        /* --- CATALOG & PRODUCTS --- */
+        .catalog-layout { display: flex; gap: 40px; margin-top: 40px; }
+        .filters { width: 250px; flex-shrink: 0; }
+        .filter-group { margin-bottom: 30px; }
+        .filter-group h3 { font-family: var(--font-head); margin-bottom: 15px; font-size: 1.2rem; }
+        .filter-opt { display: flex; flex-direction: column; gap: 10px; }
+        .filter-opt label { cursor: pointer; display: flex; align-items: center; gap: 10px; }
+        
+        .product-grid { flex: 1; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; }
+        .product-card { background: var(--c-white); transition: 0.3s; cursor: pointer; }
+        .product-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
+        .product-img { height: 300px; overflow: hidden; background: #f0f0f0; }
+        .product-img img { width: 100%; height: 100%; object-fit: cover; }
+        .product-info { padding: 20px; text-align: center; }
+        .product-title { font-family: var(--font-head); font-size: 1.2rem; margin-bottom: 5px; }
+        .product-price { color: var(--c-accent); font-weight: 700; }
+
+        /* --- PRODUCT DETAIL --- */
+        .detail-layout { display: flex; gap: 50px; background: var(--c-white); padding: 50px; box-shadow: var(--shadow); }
+        .detail-img { flex: 1; height: 500px; background: #f9f9f9; }
+        .detail-img img { width: 100%; height: 100%; object-fit: cover; }
+        .detail-content { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+        .detail-content h1 { font-family: var(--font-head); font-size: 2.5rem; margin-bottom: 10px; }
+        .detail-price { font-size: 1.8rem; color: var(--c-accent); margin-bottom: 20px; }
+        .detail-desc { margin-bottom: 30px; color: #555; }
+        .specs { margin-bottom: 30px; background: var(--c-bg); padding: 20px; border-left: 3px solid var(--c-secondary); }
+        .specs h4 { margin-bottom: 10px; font-family: var(--font-head); }
+        
+        /* --- ABOUT --- */
+        .about-content { display: flex; align-items: center; gap: 50px; }
+        .about-img { flex: 1; }
+        .about-text { flex: 1; }
+        .about-text p { margin-bottom: 20px; font-size: 1.1rem; }
+
+        /* --- CART & CHECKOUT --- */
+        .cart-page { max-width: 800px; margin: 0 auto; }
+        .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 20px; background: var(--c-white); margin-bottom: 15px; border: 1px solid #eee; }
+        .cart-item img { width: 80px; height: 80px; object-fit: cover; }
+        .cart-total { text-align: right; margin-top: 30px; font-size: 1.5rem; font-family: var(--font-head); }
+        
+        .checkout-form { background: var(--c-white); padding: 40px; max-width: 600px; margin: 0 auto; border: 1px solid #eee; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 700; font-size: 0.9rem; }
+        .form-group input, .form-group select { width: 100%; padding: 12px; border: 1px solid #ddd; font-family: var(--font-body); }
+        
+        /* --- FOOTER --- */
+        footer { background: var(--c-text); color: var(--c-white); text-align: center; padding: 50px 0; margin-top: 50px; }
+        .footer-links { margin: 20px 0; display: flex; justify-content: center; gap: 20px; }
+        
+        /* Mobile Responsive */
+        @media(max-width: 768px) {
+            .hero { flex-direction: column; text-align: center; }
+            .hero-text h1 { font-size: 2.5rem; }
+            .catalog-layout { flex-direction: column; }
+            .filters { width: 100%; }
+            .detail-layout { flex-direction: column; }
+            .detail-img { height: 300px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">ATIKA.</div>
+                <ul class="nav-links">
+                    <li><a href="#" onclick="router('home')">Beranda</a></li>
+                    <li><a href="#" onclick="router('catalog')">Katalog</a></li>
+                    <li><a href="#" onclick="router('about')">Tentang Kami</a></li>
+                </ul>
+                <div class="nav-icons">
+                    <i class="fas fa-search"></i>
+                    <div class="cart-icon" onclick="router('cart')">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="cart-count" id="cart-count">0</span>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HOME PAGE -->
+    <section id="home" class="page-section active">
+        <div class="container">
+            <
